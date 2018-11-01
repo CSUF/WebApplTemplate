@@ -4,10 +4,32 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
+*.css
+*.config
+*.log.txt
+*.sln.docstates
 *.suo
 *.user
 *.userosscache
-*.sln.docstates
+
+src/Csuf.WebApplTemplate.MvcClientApp/Notes.md
+src/Csuf.WebApplTemplate.MvcClientApp/appsettings.*
+src/Csuf.WebApplTemplate.MvcClientApp/Views/Home/About.cshtml
+src/Csuf.WebApplTemplate.MvcClientApp/Views/Home/Contact.cshtml
+src/Csuf.WebApplTemplate.MvcClientApp/Views/Home/Privacy.cshtml
+src/Csuf.WebApplTemplate.MvcClientApp/Views/Shared/_CookieConsentPartial.cshtml
+src/Csuf.WebApplTemplate.MvcClientApp/Views/Shared/_ValidationScriptsPartial.cshtml
+src/Csuf.WebApplTemplate.MvcClientApp/wwwroot/favicon.ico
+src/Csuf.WebApplTemplate.MvcClientApp/wwwroot/css/site.css
+src/Csuf.WebApplTemplate.MvcClientApp/wwwroot/css/site.min.css
+src/Csuf.WebApplTemplate.MvcClientApp/wwwroot/images/banner1.svg
+src/Csuf.WebApplTemplate.MvcClientApp/wwwroot/images/banner2.svg
+src/Csuf.WebApplTemplate.MvcClientApp/wwwroot/images/banner3.svg
+src/Csuf.WebApplTemplate.MvcClientApp/wwwroot/js/site.js
+src/Csuf.WebApplTemplate.MvcClientApp/wwwroot/js/site.min.js
+src/Csuf.WebApplTemplate.MvcClientApp/wwwroot/lib/
+
+
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

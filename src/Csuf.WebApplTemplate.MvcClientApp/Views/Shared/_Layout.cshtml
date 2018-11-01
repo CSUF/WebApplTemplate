@@ -1,0 +1,139 @@
+﻿@* (c) California State University, Fullerton *@
+
+@using Microsoft.Extensions.Configuration;
+@using System.Reflection;
+
+@inject IConfiguration Configuration
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<meta name="robots" content="noindex">
+	<title>@ViewData["Title"] - CSUF Web Application Template</title>
+	<link rel="icon" type="image/vnd.microsoft.icon" href="https://www.fullerton.edu/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="https://www.fullerton.edu/favicon.ico" />
+	<link type="text/css" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+	<link type="text/css" rel="stylesheet" href="https://apps.fullerton.edu/cdn/csufbootstrap/1.0.15/css/csufbootstrapsass.min.css" />
+	<link type="text/css" rel="stylesheet" href="https://apps.fullerton.edu/cdn/csufbootstrap/1.0.15/css/Xjazjw.min.css" />
+	<link type="text/css" rel="stylesheet" href="https://apps.fullerton.edu/cdn/csufbootstrap/1.0.15/css/bootstrap-accessibility.css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+	<header>
+		<!--SECTION: MACROBAR-->
+		<section class="macrobar">
+			<div id="macrobarPlaceholder"></div>
+			<div class="six">
+				<div id="macrobarContent">
+					<div id="wordmarkWrap">
+						<div id="wordmark"><a href="https://www.fullerton.edu" target="_blank" rel="nofollow noreferrer noopener">California State University, Fullerton</a></div>
+					</div>
+				</div>
+			</div>
+			<div class="five">
+				<div class="row no-gutter text-right">
+					<div class="col-md-5"></div>
+					<div class="col-md-7">
+						@if (User.Identity.IsAuthenticated)
+						{
+							using (Html.BeginForm("SignOut", "Account", FormMethod.Post, new { id = "signoutForm", @class = "navbar-right" }))
+							{
+								@Html.AntiForgeryToken()
+								<div class="signedInPanel">
+									<div class="btn-group" style="margin-bottom: 6px">
+										<button type="button" class="btn btn-sm btn-primary">
+											<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+											<span class="bold">@($"{User.Identity.Name}@{Configuration["CsufWebApplTemplate:FacultyStaffEmailDomain"]}")</span>
+										</button>
+										<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+											<span class="caret"></span>
+											<span class="sr-only">Toggle Dropdown</span>
+										</button>
+										<ul id="customdropdown" class="dropdown-menu dropdown-menu-right" role="menu">
+											<li><a href="javascript:document.getElementById('signoutForm').submit()">Sign out</a></li>
+										</ul>
+									</div>
+								</div>
+							}
+						}
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</section>
+		<!--//SECTION: MACROBAR-->
+		<!--SECTION: HEADER & NAVIGATION-->
+		<section id="heading">
+			<div id="header" class="wrap">
+				<!--HEADER-->
+				<div id="branding"><a target="_blank" href="https://www.fullerton.edu/it/" rel="nofollow noreferrer noopener">Division of Information Technology</a></div>
+				<div id="sitename">CSUF Web Application Template Using OIDC, IdS 3 and Shibboleth SP</div>
+				<!--//HEADER-->
+				<!--NAVIGATION-->
+				<nav id="custom-bootstrap-menu" class="navbar navbar-default navbar-inverse navbar-fixed-top hidden" role="navigation">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div id="sitenavtext">Site Navigation</div>
+					</div>
+					<div class="collapse navbar-collapse navbar-menubuilder">
+						<ul class="nav navbar-nav navbar-left">
+							<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+							<li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+							<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+						</ul>
+					</div>
+				</nav>
+				<!--//NAVIGATION-->
+			</div>
+			<!--//HEADER-->
+		</section>
+	</header>
+	<div class="container body-content">
+		@RenderBody()
+	</div>
+	<footer>
+		<div id="divFooter">
+			<div class="container">
+				<div class="logo">
+					<a target="_blank" rel="noopener" href="https://www.fullerton.edu/"><img class="pull-left img-responsive" src="https://www.fullerton.edu/_resources/images/csuf-logo-web-reversedbw.png" alt="Cal State Fullerton" /></a>
+				</div>
+				<div class="disclaimer small">
+					@{
+						Version AssemblyVersion = typeof(Startup).Assembly.GetName().Version;
+						<p>
+							@(((AssemblyTitleAttribute)Attribute.GetCustomAttribute(typeof(Startup).Assembly, typeof(AssemblyTitleAttribute))).Title)&nbsp;@($"{AssemblyVersion.Major}.{AssemblyVersion.Minor}.{AssemblyVersion.Build}").
+							This web application is maintained by California State University, Fullerton, Information Technology. California State University, Fullerton &copy;2018. All Rights Reserved.
+						</p>
+					}
+					<p>
+						This site may contain links to Web sites not administered by California State University, Fullerton, or one of its divisions, schools, departments, units or programs.
+						California State University, Fullerton, is not responsible or liable for the accuracy or the content of linked pages.
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	@RenderSection("Scripts", required: false)
+</body>
+</html>

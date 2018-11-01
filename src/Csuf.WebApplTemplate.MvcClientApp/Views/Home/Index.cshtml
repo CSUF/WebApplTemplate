@@ -1,0 +1,70 @@
+﻿@* (c) California State University.  All rights reserved. *@
+
+@using Microsoft.AspNetCore.Authentication;
+@using System.Security.Claims;
+
+@{
+	ViewData["Title"] = "Secure Page";
+}
+
+<h2><b>@ViewData["Title"]</b></h2>
+
+@{
+	string firstName = User.Claims.FirstOrDefault(c => c.Type.Equals("given_name", StringComparison.OrdinalIgnoreCase))?.Value;
+	string lastName = User.Claims.FirstOrDefault(c => c.Type.Equals("family_name", StringComparison.OrdinalIgnoreCase))?.Value;
+	string fullName = $"{firstName} {lastName}".Trim();
+	if (!string.IsNullOrWhiteSpace(fullName))
+	{
+		<p>Hello <b>@fullName</b>!</p>
+	}
+	else
+	{
+		<p>Hello <b>@User.Identity.Name</b>!</p>
+	}
+}
+
+
+<p>If you can view this page, you are in the secure area of this web application.</p>
+
+
+<h3><b>User claims</b></h3>
+
+<p>Below user claims are derived from SSO/Shibboleth attributes</p>
+
+<table class="table table-striped table-bordered table-hover table-responsive">
+	<thead>
+		<tr>
+			<td><b>Claim Type</b></td>
+			<td><b>Claim Value</b></td>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Claim itemClaim in User.Claims)
+		{
+			<tr>
+				<td>@itemClaim.Type</td>
+				<td>@itemClaim.Value</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+<p>
+	<div><b>Access Token</b></div>
+	<div>
+		<code style="overflow-wrap: break-word;">@await ViewContext.HttpContext.GetTokenAsync("access_token")</code>
+	</div>
+	<div>Copy this access token to clipboard and inspect it in <a target="_blank" href="https://jwt.io">JWT.IO<img src="https://www.fullerton.edu/it/_resources/images/icons/_new_window_icon.png" alt="Open JWT.IO in new tab" /></a></div>
+</p>
+
+@{
+	string refreshToken = await ViewContext.HttpContext.GetTokenAsync("refresh_token");
+	if (!string.IsNullOrWhiteSpace(refreshToken))
+	{
+		<div><b>Refresh Token</b></div>
+		<div>@refreshToken</div>
+	}
+}
+
+<p class="voffet2">&nbsp;</p>
