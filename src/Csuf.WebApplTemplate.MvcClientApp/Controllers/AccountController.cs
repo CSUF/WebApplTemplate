@@ -1,6 +1,6 @@
 ﻿// (c) California State University, Fullerton.  All rights reserved.
 
-namespace Csuf.WebApplTemplate
+namespace Csuf.WebApplTemplate.MvcClientApp
 {
 	using Microsoft.AspNetCore.Authentication;
 	using Microsoft.AspNetCore.Authentication.Cookies;
