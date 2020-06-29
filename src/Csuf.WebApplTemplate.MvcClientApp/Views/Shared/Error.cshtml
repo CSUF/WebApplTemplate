@@ -1,22 +1,86 @@
-﻿@model ErrorViewModel
+﻿@* (c) California State University, Fullerton.  All rights reserved. *@
+
+@model ErrorViewModel
 @{
-    ViewData["Title"] = "Error";
+	ViewData["Title"] = "Unhandled Exceptions";
 }
+<p>&nbsp;</p>
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
+		<div class="panel panel-danger">
+			<div class="panel-heading text-center">
+				<div class="panel-title"><h3 class="text-danger">Technical Difficulties</h3></div>
+			</div>
+			<div class="panel-body">
+				<h4 class="text-danger">Sorry for the inconvenience!</h4>
+				<p>This web application is experiencing some technical difficulties.</p>
+				<p>Please follow this <a runat="server" href="~/home">link</a> to try again.</p>
+				<p>Thank you.</p>
+			</div>
+		</div>
+	</div>
+</div>
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<hr />
 
-@if (Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@Model.RequestId</code>
-    </p>
-}
+<div class="panel panel-info">
+	<div class="panel-heading">
+		<div class="panel-title"><h4>Technical Information</h4></div>
+	</div>
+	<div class="panel-body">
+		@if (Model.ShowRouteOfException)
+		{
+			<p><strong>Request Path:</strong> <code>@Model.RouteOfException</code></p>
+		}
+		@if (Model.ShowErrorSource)
+		{
+			<p><strong>Source:</strong> <code>@Model.ErrorSource</code></p>
+		}
+		@if (Model.ShowErrorMessage)
+		{
+			<p><strong>Message:</strong> @Model.ErrorMessage</p>
+		}
+		@if (Model.ShowErrorTargetSiteName)
+		{
+			<p><strong>Target Site:</strong> <code>@Model.ErrorTargetSiteName</code></p>
+		}
+		@if (Model.ShowErrorStackTrace)
+		{
+			<p><div><strong>Stack Trace:</strong></div><div>@Model.ErrorStackTrace</div></p>
+		}
+		@if (Model.ShowOriginalPath)
+		{
+			<p><strong>Original Path:</strong> <code>@Model.OriginalPath</code></p>
+		}
+		@if (Model.ShowOriginalPathBase)
+		{
+			<p><strong>Original Path Base:</strong> <code>@Model.OriginalPathBase</code></p>
+		}
+		@if (Model.ShowOriginalQueryString)
+		{
+			<p><strong>Original Query String:</strong> <code>@Model.OriginalQueryString</code></p>
+		}
+		@if (Model.ShowRequestId)
+		{
+			<p><strong>Request ID:</strong> <code>@Model.RequestId</code></p>
+		}
+		@if (Model.ShowErrorData)
+		{
+			<p><strong>Exception Data:</strong> <code>@Model.ErrorData</code></p>
+		}
+	</div>
+</div>
 
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>Development environment should not be enabled in deployed applications</strong>, as it can result in sensitive information from exceptions being displayed to end users. For local debugging, development environment can be enabled by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>, and restarting the application.
-</p>
+<hr />
+
+<div class="panel panel-success">
+	<div class="panel-heading"><div class="panel-title">Developer Friendly Messages</div> </div>
+	<div class="panel-body">
+		<h5>Development Mode</h5>
+		<p>Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.</p>
+		<p>
+			<strong>Development environment should not be enabled in deployed applications</strong>, 	as it can result in sensitive information from exceptions being displayed to end users.
+			For local debugging, development environment can be enabled by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>, and restarting the application.
+		</p>
+	</div>
+</div>
